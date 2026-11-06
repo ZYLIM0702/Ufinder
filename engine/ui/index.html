@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ufinder</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="login" class="login" hidden>
+  <form id="login-form">
+    <img class="login-logo" src="logo.png" alt="Ufinder">
+    <p>Sign in with your NAS account.</p>
+    <input id="user" placeholder="User" autocomplete="username" required>
+    <input id="pass" placeholder="Password" type="password" autocomplete="current-password" required>
+    <button>Sign in</button>
+    <div id="login-error" class="error"></div>
+  </form>
+</div>
+
+<div id="app" hidden>
+  <aside>
+    <div class="brand"><img src="logo.png" alt=""><span>U<b>finder</b></span></div>
+    <nav id="nav">
+      <button data-page="search" class="on">Search</button>
+      <button data-page="graph">Graph</button>
+      <button data-page="missing">Missing files</button>
+      <button data-page="changes">Changes</button>
+      <button data-page="access">Keys and models</button>
+      <button data-page="status">Status</button>
+    </nav>
+    <div class="who"><span id="who"></span><small id="roots"></small></div>
+  </aside>
+
+  <main>
+    <section id="page-search" class="page">
+      <form id="search-form" class="searchbar">
+        <input id="q" placeholder="Describe what you remember, or drop a photo here" autocomplete="off">
+        <label class="file">Photo<input id="file" type="file" accept="image/*" hidden></label>
+        <button>Search</button>
+      </form>
+      <div id="query-image" class="query-image" hidden></div>
+      <p class="hint">Try <a data-try>a man wearing a UGREEN T-shirt</a>, <a data-try>everything about Project Falcon</a>, or <a data-try>kids loved the temple</a>. Operators: <code>type:photo</code> <code>path:Bakery</code> <code>after:2025-01-01</code></p>
+      <div id="meta" class="meta"></div>
+      <div id="results" class="results"></div>
+    </section>
+
+    <section id="page-graph" class="page" hidden>
+      <div class="graph-top">
+        <div>
+          <h2 id="graph-title">File graph</h2>
+          <p class="sub">Links come from evidence. Nobody drew them.</p>
+        </div>
+        <div class="graph-tools">
+          <label>Depth <input id="depth" type="range" min="1" max="3" value="2"></label>
+          <button id="graph-all" class="ghost">Whole graph</button>
+        </div>
+      </div>
+      <div class="legend" id="legend"></div>
+      <div class="canvas-wrap"><canvas id="canvas"></canvas><div id="tip" class="tip" hidden></div></div>
+    </section>
+
+    <section id="page-missing" class="page" hidden>
+      <h2>Missing files</h2>
+      <p class="sub">Your files mention these, but they are not on the NAS. Each one links up by itself when the file arrives.</p>
+      <div id="missing"></div>
+    </section>
+
+    <section id="page-changes" class="page" hidden>
+      <h2>Changes</h2>
+      <p class="sub">The same feed that agents and n8n read at <code>/v1/changes</code>.</p>
+      <div id="changes" class="table"></div>
+    </section>
+
+    <section id="page-access" class="page" hidden>
+      <h2>API keys</h2>
+      <p class="sub">A key can never see more than its owner. Text from files stays hidden unless you allow it.</p>
+      <form id="key-form" class="row">
+        <input id="key-name" placeholder="Key name, such as n8n" required>
+        <select id="key-tier">
+          <option value="1">Paths and types only</option>
+          <option value="2">Plus redacted snippets</option>
+        </select>
+        <button>Create key</button>
+      </form>
+      <pre id="key-new" hidden></pre>
+      <div id="keys" class="table"></div>
+      <h2 class="gap">Connect your tools</h2>
+      <pre id="connect"></pre>
+      <h2 class="gap">Models</h2>
+      <p class="sub">The local model is the default. Connect a frontier model for chosen folders only.</p>
+      <div id="models"></div>
+      <h2 class="gap">Audit log</h2>
+      <div id="audit" class="table"></div>
+    </section>
+
+    <section id="page-status" class="page" hidden>
+      <h2>Index status</h2>
+      <div id="status" class="stats"></div>
+    </section>
+  </main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

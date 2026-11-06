@@ -1,0 +1,7 @@
+models/
+eval/data/
+eval/results/*.tmp
+__pycache__/
+*.pyc
+.venv/
+data/

@@ -1,0 +1,62 @@
+[
+ {
+  "group": "model endpoint",
+  "name": "owner can connect a model endpoint",
+  "ok": true,
+  "detail": "{\"id\":\"ext-frontier-test-1\",\"note\":\"Only folders marked external_embedding use this. Everything else stays local.\"}"
+ },
+ {
+  "group": "model endpoint",
+  "name": "a normal user cannot change the model endpoint",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "group": "model endpoint",
+  "name": "egress off: file still indexes locally",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "group": "model endpoint",
+  "name": "egress off: nothing reaches the frontier API",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "group": "model endpoint",
+  "name": "egress on: opted-in folder reaches the frontier API",
+  "ok": true,
+  "detail": "[\"On phase note with marker BLUEHERON-ON-22 for the frontier check.\"]\n"
+ },
+ {
+  "group": "model endpoint",
+  "name": "egress on: other folders stay local",
+  "ok": true,
+  "detail": "[\"On phase note with marker BLUEHERON-ON-22 for the frontier check.\"]\n"
+ },
+ {
+  "group": "model endpoint",
+  "name": "egress on: a normal search sends no query out",
+  "ok": true,
+  "detail": "[\"On phase note with marker BLUEHERON-ON-22 for the frontier check.\"]\n"
+ },
+ {
+  "group": "model endpoint",
+  "name": "a person can choose to send one query out",
+  "ok": true,
+  "detail": "[\"On phase note with marker BLUEHERON-ON-22 for the frontier check.\"]\n[\"VIOLETOWL-QUERY-44\"]\n"
+ },
+ {
+  "group": "model endpoint",
+  "name": "an agent key cannot send a query out",
+  "ok": true,
+  "detail": "403"
+ },
+ {
+  "group": "model endpoint",
+  "name": "proxy refuses any other host",
+  "ok": true,
+  "detail": "http://example.com/ 403\nhttp://stub-frontier:9000/ 501\n"
+ }
+]

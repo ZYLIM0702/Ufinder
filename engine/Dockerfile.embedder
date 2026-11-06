@@ -1,0 +1,11 @@
+# Local model service. Weights are mounted read-only and never downloaded at runtime.
+FROM python:3.12-slim-bookworm
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PIP_NO_CACHE_DIR=1 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
+WORKDIR /app
+RUN pip install --index-url https://download.pytorch.org/whl/cpu torch==2.8.0 torchvision==0.23.0
+RUN pip install "transformers==5.22.1" "sentence-transformers[image]==5.7.0" "qwen-vl-utils>=0.0.14" fastapi==0.115.14 "uvicorn==0.34.3" pillow safetensors numpy
+COPY ufinder/embedder_server.py ./embedder_server.py
+RUN useradd -u 10001 -M ufinder
+USER 10001
+ENV HOME=/tmp
+CMD ["uvicorn", "embedder_server:app", "--host", "0.0.0.0", "--port", "8100", "--log-level", "warning"]

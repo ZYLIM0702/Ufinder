@@ -1,0 +1,16 @@
+{
+ "server": "nas-atlas",
+ "protocol": "2025-11-25",
+ "tools": [
+  "search_files",
+  "get_file",
+  "get_related",
+  "list_changes",
+  "read_snippet",
+  "propose_organization"
+ ],
+ "top_result": "Bakery/Invoices/INV-2025-0415.pdf",
+ "first_reason": "Text",
+ "related_ok": true,
+ "bad_key_rejected": true
+}

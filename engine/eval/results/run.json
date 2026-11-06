@@ -1,0 +1,13 @@
+{
+ "files": 464,
+ "restart_skipped": 457,
+ "ghost_seconds": 0.5,
+ "new_file_seconds": 2.1,
+ "rename_seconds": 0.7,
+ "delete_seconds": 0.7,
+ "index_minutes": 33.666666666666664,
+ "index_mb": 26,
+ "source_mb": 29,
+ "idle_mb": 295,
+ "embedder_gb": 8.27
+}

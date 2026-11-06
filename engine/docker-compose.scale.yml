@@ -1,0 +1,30 @@
+# Throwaway stack for eval/scale_test.py. Separate volumes, nothing shared with the real index.
+name: ufinder-scale
+
+services:
+  scale:
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM ufinder/engine:0.1.0
+        USER root
+        RUN apt-get update && apt-get install -y --no-install-recommends ripgrep && rm -rf /var/lib/apt/lists/*
+    command: ["python", "/eval/scale_test.py"]
+    environment:
+      UFINDER_DATA: /data
+      QDRANT_URL: http://qdrant:6333
+      SCALE_N: "${SCALE_N:-1000000}"
+      UFINDER_VECTOR_DIM: "1024"
+    volumes: ["scale-data:/data", "scale-files:/files", "./eval:/eval:ro"]
+    depends_on: [qdrant]
+  qdrant:
+    image: qdrant/qdrant:v1.20.0-unprivileged
+    environment:
+      QDRANT__TELEMETRY_DISABLED: "true"
+    volumes: ["scale-vectors:/qdrant/storage"]
+    mem_limit: 6g
+
+volumes:
+  scale-data: {}
+  scale-files: {}
+  scale-vectors: {}

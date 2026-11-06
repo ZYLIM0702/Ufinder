@@ -1,0 +1,46 @@
+{
+  "roots": [
+    {
+      "name": "shared",
+      "path": "/sources/shared",
+      "allow": [
+        "alice",
+        "bob"
+      ]
+    },
+    {
+      "name": "alice-private",
+      "path": "/sources/alice-private",
+      "allow": [
+        "alice"
+      ]
+    },
+    {
+      "name": "bob-private",
+      "path": "/sources/bob-private",
+      "allow": [
+        "bob"
+      ]
+    },
+    {
+      "name": "frontier-lab",
+      "path": "/sources/frontier-lab",
+      "allow": [
+        "alice"
+      ],
+      "external_embedding": true
+    }
+  ],
+  "users": [
+    {
+      "name": "alice",
+      "role": "admin",
+      "password": "alice-demo-pass"
+    },
+    {
+      "name": "bob",
+      "role": "user",
+      "password": "bob-demo-pass"
+    }
+  ]
+}

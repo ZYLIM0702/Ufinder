@@ -1,0 +1,14 @@
+.DS_Store
+__pycache__/
+*.pyc
+.venv/
+
+# UGREEN's kit: download it from the hackathon starter kit page
+uliya-skill-kit/
+
+# Large or generated
+engine/models/
+engine/data/
+engine/eval/data/
+engine/eval/results/shots/
+engine/eval/results/*.tmp

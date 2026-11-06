@@ -1,0 +1,118 @@
+# Ufinder engine.
+#
+# Everything that touches user data sits on `ufinder`, an internal network with no
+# route out. A small forwarder with no data publishes the one port. Containers run
+# non-root with no capabilities and a read-only filesystem. Sources mount read-only.
+#
+# This file avoids privileged, cap_add and host networking, which UGOS Docker APP
+# packaging forbids, so it can move to a UPK without redesign.
+
+name: ufinder
+
+x-locked: &locked
+  read_only: true
+  restart: unless-stopped
+  security_opt: ["no-new-privileges:true"]
+  cap_drop: ["ALL"]
+  tmpfs: ["/tmp:size=512m"]
+
+services:
+  gateway:
+    <<: *locked
+    build: { context: ., dockerfile: Dockerfile }
+    image: ufinder/engine:0.1.0
+    command: ["uvicorn", "ufinder.gateway:app", "--host", "0.0.0.0", "--port", "8787", "--log-level", "warning"]
+    environment: &env
+      UFINDER_DATA: /data
+      UFINDER_CONFIG: /config/ufinder.json
+      UFINDER_EXCHANGE: /exchange
+      QDRANT_URL: http://qdrant:6333
+      EMBEDDER_URL: http://embedder:8100
+      UFINDER_VECTOR_DIM: "1024"
+      UFINDER_RECONCILE_SECONDS: "${UFINDER_RECONCILE_SECONDS:-300}"
+      UFINDER_EGRESS_PROXY: "${UFINDER_EGRESS_PROXY:-}"
+      UFINDER_AUTH_MODE: "${UFINDER_AUTH_MODE:-local}"
+      HF_HUB_OFFLINE: "1"
+      HOME: /tmp
+    networks: [ufinder]
+    volumes:
+      - ufinder-data:/data
+      - ./config:/config:ro
+      - ./ui:/app/ui:ro
+      - ${UFINDER_EXCHANGE_ROOT:-./data/exchange}:/exchange
+    mem_limit: 1g
+    depends_on: [qdrant]
+
+  # The only container with a published port. No data, no keys, one fixed target.
+  edge:
+    <<: *locked
+    image: ufinder/engine:0.1.0
+    command: ["python", "-m", "ufinder.edge_proxy"]
+    ports: ["${UFINDER_PORT:-8787}:8787"]
+    networks: [ufinder, edge]
+    mem_limit: 64m
+    depends_on: [gateway]
+
+  indexer:
+    <<: *locked
+    image: ufinder/engine:0.1.0
+    command: ["python", "-m", "ufinder.indexer"]
+    environment:
+      <<: *env
+      UFINDER_WHISPER_DIR: /models/whisper
+      UFINDER_WHISPER_MODEL: base
+      OMP_NUM_THREADS: "4"
+    networks: [ufinder]
+    volumes:
+      - ufinder-data:/data
+      - ./config:/config:ro
+      - ./models:/models:ro
+      - ${UFINDER_SOURCE_ROOT:-./data/sources}:/sources:ro
+    mem_limit: 3g
+    cpus: 4
+    depends_on: [qdrant, embedder]
+
+  embedder:
+    <<: *locked
+    build: { context: ., dockerfile: Dockerfile.embedder }
+    image: ufinder/embedder:0.1.0
+    environment:
+      MODEL_DIR: /models/qwen3-vl-embedding-2b
+      UFINDER_VECTOR_DIM: "1024"
+      UFINDER_EMBED_THREADS: "${UFINDER_EMBED_THREADS:-6}"
+      UFINDER_EMBED_SIDE: "512"
+    networks: [ufinder]
+    volumes: ["./models:/models:ro"]
+    mem_limit: 11g
+    cpus: ${UFINDER_EMBED_CPUS:-6}
+
+  qdrant:
+    <<: *locked
+    image: qdrant/qdrant:v1.20.0-unprivileged
+    environment:
+      QDRANT__TELEMETRY_DISABLED: "true"
+    networks: [ufinder]
+    volumes: ["ufinder-vectors:/qdrant/storage"]
+    tmpfs: ["/qdrant/snapshots:uid=1000,gid=1000", "/tmp:uid=1000,gid=1000"]
+    mem_limit: 1g
+
+  # Off unless started with: --profile egress
+  # The one door out, for folders the owner opted in. One allowed host.
+  egress:
+    <<: *locked
+    profiles: [egress]
+    image: ufinder/engine:0.1.0
+    command: ["python", "-m", "ufinder.egress_proxy"]
+    environment:
+      UFINDER_EGRESS_ALLOW: "${UFINDER_EGRESS_ALLOW:-}"
+    networks: [ufinder, edge]
+    mem_limit: 128m
+
+networks:
+  ufinder:
+    internal: true
+  edge: {}
+
+volumes:
+  ufinder-data: {}
+  ufinder-vectors: {}

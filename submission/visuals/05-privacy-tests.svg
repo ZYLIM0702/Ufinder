@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1500" height="1000" viewBox="0 0 1500 1000" font-family="Avenir Next, Helvetica Neue, Helvetica, Arial, sans-serif">
+<defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#090f22"/><stop offset="1" stop-color="#141a3c"/></linearGradient>
+    <linearGradient id="title" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#19e3a1"/><stop offset="1" stop-color="#5aa2ff"/></linearGradient>
+    <linearGradient id="gTeal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2bf0ad"/><stop offset="1" stop-color="#0db8c8"/></linearGradient>
+    <linearGradient id="gBlue" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#62b0ff"/><stop offset="1" stop-color="#6a63ff"/></linearGradient>
+    <linearGradient id="gViolet" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b57bff"/><stop offset="1" stop-color="#ff5fa2"/></linearGradient>
+    <linearGradient id="gAmber" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffdf6e"/><stop offset="1" stop-color="#ff9a3d"/></linearGradient>
+    <linearGradient id="gCoral" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff8a7a"/><stop offset="1" stop-color="#ff4f9a"/></linearGradient>
+    <linearGradient id="gGate" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4f7dff"/><stop offset="0.55" stop-color="#8a5cff"/><stop offset="1" stop-color="#e255c0"/></linearGradient>
+    <linearGradient id="gFolder" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffd35c"/><stop offset="1" stop-color="#ffa23f"/></linearGradient>
+    <linearGradient id="skillFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0f3a3f"/><stop offset="1" stop-color="#0d2230"/></linearGradient>
+    <linearGradient id="engFill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1d2558"/><stop offset="1" stop-color="#231c52"/></linearGradient>
+    <linearGradient id="chassis" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#46536f"/><stop offset="1" stop-color="#262f47"/></linearGradient>
+    <linearGradient id="tray" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#141b30"/><stop offset="1" stop-color="#0b1020"/></linearGradient>
+    <radialGradient id="glowT"><stop offset="0" stop-color="#19e3a1" stop-opacity=".30"/><stop offset="1" stop-color="#19e3a1" stop-opacity="0"/></radialGradient>
+    <radialGradient id="glowV"><stop offset="0" stop-color="#8a5cff" stop-opacity=".38"/><stop offset="1" stop-color="#8a5cff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="glowA"><stop offset="0" stop-color="#ffb347" stop-opacity=".22"/><stop offset="1" stop-color="#ffb347" stop-opacity="0"/></radialGradient>
+    <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.3" fill="#ffffff" opacity=".07"/></pattern>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="9" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="led" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="shadow" x="-10%" y="-20%" width="120%" height="150%"><feGaussianBlur in="SourceAlpha" stdDeviation="10"/><feOffset dy="8"/><feComponentTransfer><feFuncA type="linear" slope=".45"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#e8eefb"/></marker>
+    <marker id="ahA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#ffc24a"/></marker>
+
+    <!-- icons: 24 grid, stroke inherited -->
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3.5 20.5l1.1-4.7A8.5 8.5 0 1 1 21 12z"/><path d="M8.5 12h.01M12.5 12h.01M16.5 12h.01" stroke-width="3"/></symbol>
+    <symbol id="i-web" viewBox="0 0 24 24"><rect x="2.5" y="4" width="19" height="16" rx="2.5"/><path d="M2.5 9h19"/><circle cx="11" cy="14.2" r="2.4"/><path d="M12.8 16l2.2 2"/></symbol>
+    <symbol id="i-bot" viewBox="0 0 24 24"><rect x="4.5" y="8.5" width="15" height="11.5" rx="3"/><path d="M12 8.5V4.5"/><circle cx="12" cy="3.4" r="1.2"/><path d="M9 13.2h.01M15 13.2h.01" stroke-width="3"/><path d="M9.5 16.8h5M2 13v3.5M22 13v3.5"/></symbol>
+    <symbol id="i-graph" viewBox="0 0 24 24"><path d="M6.5 6.5L12 13l6.5-6.5M12 13l-6 6M12 13l7 5.5"/><circle cx="5.5" cy="5.5" r="2.6" /><circle cx="18.5" cy="5.5" r="2.6"/><circle cx="12" cy="13" r="2.8"/><circle cx="5" cy="19.5" r="2.2"/><circle cx="19.5" cy="19" r="2.2"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 2.5h8.5L19 7v14.5H6z"/><path d="M14.5 2.5V7H19M9 12h7M9 16h7"/></symbol>
+    <symbol id="i-photo" viewBox="0 0 24 24"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><circle cx="8.2" cy="9.7" r="1.7"/><path d="M21.5 15.5l-5-5L6.5 19.5"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4.5 19.5V5a2.5 2.5 0 0 1 2.5-2.5h12.5v15H7a2.5 2.5 0 0 0-2.5 2.5zM4.5 19.5a2 2 0 0 0 2 2h13"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M10 8.2l6 3.8-6 3.8z"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="M2.5 7a2 2 0 0 1 2-2h4.8l2.2 2.5h8a2 2 0 0 1 2 2V18a2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2.5l8 3v6.5c0 5-3.4 8-8 9.5-4.6-1.5-8-4.5-8-9.5V5.5z"/><path d="M8.5 12l2.5 2.5 4.5-4.5"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="11" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3M12 15v2.5"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15.5" r="5"/><path d="M11.6 12L20.5 3M16.5 7l3.2 3.2M13.8 9.8l2 2"/></symbol>
+    <symbol id="i-nocloud" viewBox="0 0 24 24"><path d="M7 19h10.5a4.5 4.5 0 0 0 .8-8.9A6.5 6.5 0 0 0 5.8 8.9 5 5 0 0 0 7 19z"/><path d="M3.5 3.5l17 17" stroke-width="2.6"/></symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 19h10.500a4.500 4.500 0 0 0 .8-8.900A6.500 6.500 0 0 0 5.800 8.900 5 5 0 0 0 7 19z"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4.5"/><path d="M3.5 21.5c1.4-4.6 4.8-7 8.5-7s7.100 2.400 8.500 7"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M1.500 12S5.500 4.800 12 4.800 22.500 12 22.500 12 18.500 19.200 12 19.200 1.500 12 1.500 12z"/><circle cx="12" cy="12" r="3.200"/></symbol>
+    <symbol id="i-chip" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.800" y="9.800" width="4.400" height="4.400" rx=".8"/><path d="M9.500 2.500V6M14.500 2.500V6M9.500 18v3.500M14.500 18v3.500M2.500 9.500H6M2.500 14.500H6M18 9.500h3.500M18 14.500h3.500"/></symbol>
+    <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5.500" rx="8.500" ry="3"/><path d="M3.500 5.500v13c0 1.700 3.800 3 8.500 3s8.500-1.300 8.500-3v-13M3.500 12c0 1.700 3.800 3 8.500 3s8.500-1.300 8.500-3"/></symbol>
+    <symbol id="i-mic" viewBox="0 0 24 24"><rect x="8.500" y="2.500" width="7" height="12" rx="3.500"/><path d="M4.500 11.500a7.500 7.500 0 0 0 15 0M12 19v2.500"/></symbol>
+    <symbol id="i-video" viewBox="0 0 24 24"><rect x="2.500" y="5.500" width="14" height="13" rx="2.500"/><path d="M16.500 10.500l5-3v9l-5-3z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M4.500 12.500l5 5 10-11"/></symbol>
+  </defs>
+<rect width="1500" height="1000" fill="url(#bg)"/><rect width="1500" height="1000" fill="url(#dots)"/>
+<ellipse cx="1100" cy="240" rx="560" ry="300" fill="url(#glowT)"/><ellipse cx="300" cy="800" rx="520" ry="340" fill="url(#glowV)"/>
+<text x="48" y="86" font-size="54" font-weight="800" fill="#e8eefb" text-anchor="start">Enforced below the LLM</text>
+<text x="50" y="126" font-size="24" font-weight="500" fill="#d6dff0" text-anchor="start">Every check runs against the live Docker stack. Nothing is mocked.</text>
+<text x="1452" y="92" font-size="66" font-weight="800" fill="url(#title)" text-anchor="end">85 / 85</text>
+<text x="1452" y="126" font-size="22" font-weight="600" fill="#d6dff0" text-anchor="end">checks passed</text>
+<rect x="48" y="152" width="690" height="106" rx="18" fill="#17214a" stroke="#ffffff" stroke-opacity=".14" stroke-width="2" filter="url(#shadow)"/>
+<circle cx="102" cy="205.0" r="30" fill="url(#gTeal)" filter="url(#glow)"/><use xlink:href="#i-user" x="82" y="185" width="40" height="40" fill="none" stroke="#0b1020" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="148" y="196" font-size="24" font-weight="800" fill="#e8eefb" text-anchor="start">User segregation</text><text x="148" y="228" font-size="17" font-weight="500" fill="#c3cfe6" text-anchor="start">One user never sees another's files, topics or counts</text>
+<text x="714" y="214" font-size="30" font-weight="800" fill="#5ff5c6" text-anchor="end">19/19</text>
+<rect x="762" y="152" width="690" height="106" rx="18" fill="#17214a" stroke="#ffffff" stroke-opacity=".14" stroke-width="2" filter="url(#shadow)"/>
+<circle cx="816" cy="205.0" r="30" fill="url(#gTeal)" filter="url(#glow)"/><use xlink:href="#i-nocloud" x="796" y="185" width="40" height="40" fill="none" stroke="#0b1020" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="862" y="196" font-size="24" font-weight="800" fill="#e8eefb" text-anchor="start">No route out</text><text x="862" y="228" font-size="17" font-weight="500" fill="#c3cfe6" text-anchor="start">Nothing that touches data can reach the internet</text>
+<text x="1428" y="214" font-size="30" font-weight="800" fill="#5ff5c6" text-anchor="end">10/10</text>
+<rect x="48" y="269" width="690" height="106" rx="18" fill="#17214a" stroke="#ffffff" stroke-opacity=".14" stroke-width="2" filter="url(#shadow)"/>
+<circle cx="102" cy="322.0" r="30" fill="url(#gTeal)" filter="url(#glow)"/><use xlink:href="#i-lock" x="82" y="302" width="40" height="40" fill="none" stroke="#0b1020" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="148" y="313" font-size="24" font-weight="800" fill="#e8eefb" text-anchor="start">Least privilege</text><text x="148" y="345" font-size="17" font-weight="500" fill="#c3cfe6" text-anchor="start">Non-root, zero capabilities, in every container</text>
+<text x="714" y="331" font-size="30" font-weight="800" fill="#5ff5c6" text-anchor="end">5/5</text>
+<rect x="762" y="269" width="690" height="106" rx="18" fill="#17214a" stroke="#ffffff" stroke-opacity=".14" stroke-width="2" filter="url(#shadow)"/>
+<circle cx="816" cy="322.0" r="30" fill="url(#gTeal)" filter="url(#glow)"/><use xlink:href="#i-folder" x="796" y="302" width="40" height="40" fill="none" stroke="#0b1020" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="862" y="313" font-size="24" font-weight="800" fill="#e8eefb" text-anchor="start">Read-only files</text><text x="862" y="345" font-size="17" font-weight="500" fill="#c3cfe6" text-anchor="start">The engine cannot change a user file</text>
+<text x="1428" y="331" font-size="30" font-weight="800" fill="#5ff5c6" text-anchor="end">3/3</text>
+<rect x="48" y="386" width="690" height="106" rx="18" fill="#17214a" stroke="#ffffff" stroke-opacity=".14" stroke-width="2" filter="url(#shadow)"/>
+<circle cx="102" cy="439.0" r="30" fill="url(#gTeal)" filter="url(#glow)"/><use xlink:href="#i-key" x="82" y="419" width="40" height="40" fill="none" stroke="#0b1020" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="148" y="430" font-size="24" font-weight="800" fill="#e8eefb" text-anchor="start">Key limits</text><text x="148" y="462" font-size="17" font-weight="500" fill="#c3cfe6" text-anchor="start">Scope, budget, revocation, hashed storage</text>
+<text x="714" y="448" font-size="30" font-weight="800" fill="#5ff5c6" text-anchor="end">7/7</text>
+<rect x="762" y="386" width="690" height="106" rx="18" fill="#17214a" stroke="#ffffff" stroke-opacity=".14" stroke-width="2" filter="url(#shadow)"/>
+<circle cx="816" cy="439.0" r="30" fill="url(#gTeal)" filter="url(#glow)"/><use xlink:href="#i-shield" x="796" y="419" width="40" height="40" fill="none" stroke="#0b1020" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="862" y="430" font-size="24" font-weight="800" fill="#e8eefb" text-anchor="start">Content tiers</text><text x="862" y="462" font-size="17" font-weight="500" fill="#c3cfe6" text-anchor="start">External keys get paths. Snippets are redacted</text>
+<text x="1428" y="448" font-size="30" font-weight="800" fill="#5ff5c6" text-anchor="end">3/3</text>
+<rect x="48" y="503" width="690" height="106" rx="18" fill="#17214a" stroke="#ffffff" stroke-opacity=".14" stroke-width="2" filter="url(#shadow)"/>
+<circle cx="102" cy="556.0" r="30" fill="url(#gTeal)" filter="url(#glow)"/><use xlink:href="#i-doc" x="82" y="536" width="40" height="40" fill="none" stroke="#0b1020" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="148" y="547" font-size="24" font-weight="800" fill="#e8eefb" text-anchor="start">Prompt injection</text><text x="148" y="579" font-size="17" font-weight="500" fill="#c3cfe6" text-anchor="start">Hostile files stay data. No send or delete tool</text>
+<text x="714" y="565" font-size="30" font-weight="800" fill="#5ff5c6" text-anchor="end">3/3</text>
+<rect x="762" y="503" width="690" height="106" rx="18" fill="#17214a" stroke="#ffffff" stroke-opacity=".14" stroke-width="2" filter="url(#shadow)"/>
+<circle cx="816" cy="556.0" r="30" fill="url(#gTeal)" filter="url(#glow)"/><use xlink:href="#i-lock" x="796" y="536" width="40" height="40" fill="none" stroke="#0b1020" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="862" y="547" font-size="24" font-weight="800" fill="#e8eefb" text-anchor="start">Credential files</text><text x="862" y="579" font-size="17" font-weight="500" fill="#c3cfe6" text-anchor="start">Keys and env files are never indexed</text>
+<text x="1428" y="565" font-size="30" font-weight="800" fill="#5ff5c6" text-anchor="end">4/4</text>
+<rect x="48" y="620" width="690" height="106" rx="18" fill="#17214a" stroke="#ffffff" stroke-opacity=".14" stroke-width="2" filter="url(#shadow)"/>
+<circle cx="102" cy="673.0" r="30" fill="url(#gTeal)" filter="url(#glow)"/><use xlink:href="#i-doc" x="82" y="653" width="40" height="40" fill="none" stroke="#0b1020" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="148" y="664" font-size="24" font-weight="800" fill="#e8eefb" text-anchor="start">Audit chain</text><text x="148" y="696" font-size="17" font-weight="500" fill="#c3cfe6" text-anchor="start">Editing history breaks the chain</text>
+<text x="714" y="682" font-size="30" font-weight="800" fill="#5ff5c6" text-anchor="end">2/2</text>
+<rect x="762" y="620" width="690" height="106" rx="18" fill="#17214a" stroke="#ffffff" stroke-opacity=".14" stroke-width="2" filter="url(#shadow)"/>
+<circle cx="816" cy="673.0" r="30" fill="url(#gTeal)" filter="url(#glow)"/><use xlink:href="#i-eye" x="796" y="653" width="40" height="40" fill="none" stroke="#0b1020" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="862" y="664" font-size="24" font-weight="800" fill="#e8eefb" text-anchor="start">Change tracking</text><text x="862" y="696" font-size="17" font-weight="500" fill="#c3cfe6" text-anchor="start">Edits and deletes are purged, not hidden</text>
+<text x="1428" y="682" font-size="30" font-weight="800" fill="#5ff5c6" text-anchor="end">8/8</text>
+<rect x="48" y="737" width="690" height="106" rx="18" fill="#17214a" stroke="#ffffff" stroke-opacity=".14" stroke-width="2" filter="url(#shadow)"/>
+<circle cx="102" cy="790.0" r="30" fill="url(#gTeal)" filter="url(#glow)"/><use xlink:href="#i-graph" x="82" y="770" width="40" height="40" fill="none" stroke="#0b1020" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="148" y="781" font-size="24" font-weight="800" fill="#e8eefb" text-anchor="start">Missing files</text><text x="148" y="813" font-size="17" font-weight="500" fill="#c3cfe6" text-anchor="start">Mentioned but absent, and resolves itself</text>
+<text x="714" y="799" font-size="30" font-weight="800" fill="#5ff5c6" text-anchor="end">2/2</text>
+<rect x="762" y="737" width="690" height="106" rx="18" fill="#17214a" stroke="#ffffff" stroke-opacity=".14" stroke-width="2" filter="url(#shadow)"/>
+<circle cx="816" cy="790.0" r="30" fill="url(#gTeal)" filter="url(#glow)"/><use xlink:href="#i-folder" x="796" y="770" width="40" height="40" fill="none" stroke="#0b1020" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="862" y="781" font-size="24" font-weight="800" fill="#e8eefb" text-anchor="start">Skill bridge</text><text x="862" y="813" font-size="17" font-weight="500" fill="#c3cfe6" text-anchor="start">Plain files, per user, with no sockets</text>
+<text x="1428" y="799" font-size="30" font-weight="800" fill="#5ff5c6" text-anchor="end">5/5</text>
+<rect x="48" y="854" width="690" height="106" rx="18" fill="#17214a" stroke="#ffffff" stroke-opacity=".14" stroke-width="2" filter="url(#shadow)"/>
+<circle cx="102" cy="907.0" r="30" fill="url(#gTeal)" filter="url(#glow)"/><use xlink:href="#i-cloud" x="82" y="887" width="40" height="40" fill="none" stroke="#0b1020" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="148" y="898" font-size="24" font-weight="800" fill="#e8eefb" text-anchor="start">Frontier endpoint</text><text x="148" y="930" font-size="17" font-weight="500" fill="#c3cfe6" text-anchor="start">Off by default. One host. Opted-in folders only</text>
+<text x="714" y="916" font-size="30" font-weight="800" fill="#5ff5c6" text-anchor="end">10/10</text>
+<rect x="762" y="854" width="690" height="106" rx="18" fill="#17214a" stroke="#ffffff" stroke-opacity=".14" stroke-width="2" filter="url(#shadow)"/>
+<circle cx="816" cy="907.0" r="30" fill="url(#gTeal)" filter="url(#glow)"/><use xlink:href="#i-eye" x="796" y="887" width="40" height="40" fill="none" stroke="#0b1020" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="862" y="898" font-size="24" font-weight="800" fill="#e8eefb" text-anchor="start">Search features</text><text x="862" y="930" font-size="17" font-weight="500" fill="#c3cfe6" text-anchor="start">Chinese text, image query, operators, embeddings</text>
+<text x="1428" y="916" font-size="30" font-weight="800" fill="#5ff5c6" text-anchor="end">4/4</text>
+</svg>

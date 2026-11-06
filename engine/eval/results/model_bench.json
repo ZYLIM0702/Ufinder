@@ -1,0 +1,35 @@
+{
+ "int8_cosine": 0.6195,
+ "rows": [
+  {
+   "key": "gpu",
+   "label": "Apple GPU\nbfloat16",
+   "images_per_s": 2.42,
+   "ram_gb": 0.8
+  },
+  {
+   "key": "float32",
+   "label": "CPU\nfloat32",
+   "images_per_s": 0.939,
+   "ram_gb": 9.54
+  },
+  {
+   "key": "int8",
+   "label": "CPU\nint8",
+   "images_per_s": 0.416,
+   "ram_gb": 13.7
+  },
+  {
+   "key": "bf16",
+   "label": "CPU\nbfloat16",
+   "images_per_s": 0.136,
+   "ram_gb": 4.47
+  },
+  {
+   "key": "docker",
+   "label": "Docker pipeline\nwith OCR",
+   "images_per_s": 0.212,
+   "ram_gb": 8.27
+  }
+ ]
+}

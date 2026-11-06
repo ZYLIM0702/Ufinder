@@ -1,0 +1,5 @@
+scale-1  | sql loaded 96.4 s
+scale-1  | hnsw ready 45.0 s
+scale-1  | RESULT {"files": 200000, "vectors": 200000, "edges": 999985, "latency_ms": {"full": {"p50": 20.8, "p95": 27.8}, "keyword_only": {"p50": 6.6, "p95": 10.5}, "common_words": {"p50": 114.6, "p95": 131.2}}, "ppr_ms": 73.0, "ppr_nodes_touched": 140, "exact_id_found": true, "other_root_hidden": true, "sqlite_mb": 795, "python_peak_mb": 738}
+atlas-scale-qdrant-1 867.9MiB / 2GiB
+938M	/qdrant/storage

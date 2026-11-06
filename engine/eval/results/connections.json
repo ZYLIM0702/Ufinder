@@ -1,0 +1,20 @@
+[
+ {
+  "group": "no internet",
+  "name": "embedder made no public connection while working",
+  "ok": true,
+  "detail": "3 addresses seen, public: []"
+ },
+ {
+  "group": "no internet",
+  "name": "indexer made no public connection while working",
+  "ok": true,
+  "detail": "3 addresses seen, public: []"
+ },
+ {
+  "group": "no internet",
+  "name": "gateway made no public connection while working",
+  "ok": true,
+  "detail": "4 addresses seen, public: []"
+ }
+]

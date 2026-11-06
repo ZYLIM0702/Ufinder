@@ -1,0 +1,7 @@
+# Test only: a fake frontier API, reachable only through the egress proxy.
+services:
+  stub-frontier:
+    image: ufinder/engine:0.1.0
+    command: ["python", "/stub/stub_frontier.py"]
+    volumes: ["./eval:/stub:ro"]
+    networks: [edge]

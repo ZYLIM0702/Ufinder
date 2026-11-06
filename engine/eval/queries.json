@@ -1,0 +1,871 @@
+{
+ "meta": {
+  "created": "2026-11-06T14:32:20",
+  "photos_noise": 320,
+  "note": "Synthetic corpus. Queries and targets written before any search ran.",
+  "ghosts_expected": [
+   "Falcon-floorplan-v3.pdf",
+   "Westpac-loan-approval.pdf"
+  ],
+  "trap_alice": "ZEBRA-ORCHID-7741",
+  "trap_bob": "MANGO-QUARTZ-9920",
+  "canaries": [
+   "CANARY-ENV-1",
+   "CANARY-PEM-2",
+   "CANARY-GIT-3"
+  ],
+  "injection_file": "Bakery/Contracts/vendor-terms-update.pdf",
+  "chinese_file": "Bakery/Contracts/面粉供应备忘录.txt"
+ },
+ "queries": [
+  {
+   "cat": "name",
+   "query": "Harbor Mills supply agreement",
+   "targets": [
+    "Bakery/Contracts/Harbor-Mills-Supply-Agreement-2025.pdf"
+   ]
+  },
+  {
+   "cat": "name",
+   "query": "Riverbend lease v2",
+   "targets": [
+    "Bakery/Contracts/Riverbend-Lease-2025_v2.docx",
+    "Bakery/Archive/lease-signed-copy.docx"
+   ]
+  },
+  {
+   "cat": "name",
+   "query": "invoice INV-2025-0433",
+   "targets": [
+    "Bakery/Invoices/INV-2025-0433.pdf"
+   ]
+  },
+  {
+   "cat": "name",
+   "query": "sourdough rye",
+   "targets": [
+    "Bakery/Recipes/sourdough-rye.txt"
+   ]
+  },
+  {
+   "cat": "name",
+   "query": "oven walkthrough video",
+   "targets": [
+    "Bakery/Videos/oven-walkthrough.mp4"
+   ]
+  },
+  {
+   "cat": "name",
+   "query": "kickoff notes",
+   "targets": [
+    "Bakery/Meetings/2025-03-04 kickoff notes.md"
+   ]
+  },
+  {
+   "cat": "content",
+   "query": "how much is the fee if we pay the flour bill late",
+   "targets": [
+    "Bakery/Contracts/Harbor-Mills-Supply-Agreement-2025.pdf"
+   ]
+  },
+  {
+   "cat": "content",
+   "query": "how many days notice to end the supply contract",
+   "targets": [
+    "Bakery/Contracts/Harbor-Mills-Supply-Agreement-2025.pdf"
+   ]
+  },
+  {
+   "cat": "content",
+   "query": "what is the monthly rent at Mill Lane now",
+   "targets": [
+    "Bakery/Contracts/Riverbend-Lease-2025_v2.docx",
+    "Bakery/Archive/lease-signed-copy.docx"
+   ]
+  },
+  {
+   "cat": "content",
+   "query": "yearly rent increase cap",
+   "targets": [
+    "Bakery/Contracts/Riverbend-Lease-2025_v2.docx",
+    "Bakery/Archive/lease-signed-copy.docx"
+   ]
+  },
+  {
+   "cat": "content",
+   "query": "how long to bake the rye bread",
+   "targets": [
+    "Bakery/Recipes/sourdough-rye.txt"
+   ]
+  },
+  {
+   "cat": "content",
+   "query": "total cost of the second oven project",
+   "targets": [
+    "Bakery/Meetings/Falcon budget.md"
+   ]
+  },
+  {
+   "cat": "content",
+   "query": "where does the equipment loan come from",
+   "targets": [
+    "Bakery/Meetings/Falcon budget.md"
+   ]
+  },
+  {
+   "cat": "content",
+   "query": "deposit paid for the deck oven",
+   "targets": [
+    "Bakery/Invoices/INV-2025-0507.pdf",
+    "Bakery/Meetings/Falcon budget.md"
+   ]
+  },
+  {
+   "cat": "ocr",
+   "query": "receipt for proofing baskets",
+   "targets": [
+    "Bakery/Scans/scan_001.jpg"
+   ]
+  },
+  {
+   "cat": "ocr",
+   "query": "stainless shelving receipt total",
+   "targets": [
+    "Bakery/Scans/scan_002.jpg"
+   ]
+  },
+  {
+   "cat": "ocr",
+   "query": "what did we spend on printer toner",
+   "targets": [
+    "Bakery/Scans/scan_004.jpg"
+   ]
+  },
+  {
+   "cat": "ocr",
+   "query": "three phase outlet electrician",
+   "targets": [
+    "Bakery/Scans/scan_006.jpg"
+   ]
+  },
+  {
+   "cat": "ocr",
+   "query": "whiteboard with the launch date and budget",
+   "targets": [
+    "Bakery/Photos/IMG_3301.jpg"
+   ]
+  },
+  {
+   "cat": "ocr",
+   "query": "booking reference KBH-77120 receipt",
+   "targets": [
+    "Family/2025-06-holiday/scan_0001.jpg",
+    "Family/2025-06-holiday/itinerary.md"
+   ]
+  },
+  {
+   "cat": "spoken",
+   "query": "landlord approved the vent if work is outside trading hours",
+   "targets": [
+    "Bakery/Recordings/voice-memo-0305.m4a",
+    "Bakery/Contracts/Ashford-vent-consent-letter.pdf"
+   ]
+  },
+  {
+   "cat": "spoken",
+   "query": "flour delivery moving to Wednesday",
+   "targets": [
+    "Bakery/Recordings/supplier-call-0318.m4a",
+    "Bakery/Contracts/面粉供应备忘录.txt"
+   ]
+  },
+  {
+   "cat": "spoken",
+   "query": "kids loved the temple",
+   "targets": [
+    "Family/2025-06-holiday/voice-note-day2.m4a"
+   ]
+  },
+  {
+   "cat": "spoken",
+   "query": "stone decks hold forty loaves",
+   "targets": [
+    "Bakery/Videos/oven-walkthrough.mp4"
+   ]
+  },
+  {
+   "cat": "graph",
+   "query": "everything about Project Falcon",
+   "targets": [
+    "Bakery/Meetings/2025-03-04 kickoff notes.md",
+    "Bakery/Meetings/Falcon budget.md",
+    "Bakery/Photos/IMG_3301.jpg",
+    "Bakery/Recordings/voice-memo-0305.m4a",
+    "Bakery/Videos/oven-walkthrough.mp4",
+    "Bakery/Invoices/INV-2025-0507.pdf",
+    "Bakery/Contracts/Ashford-vent-consent-letter.pdf"
+   ]
+  },
+  {
+   "cat": "graph",
+   "query": "photos from the Penang trip",
+   "targets": [
+    "Family/2025-06-holiday/DSC04100.jpg",
+    "Family/2025-06-holiday/DSC04101.jpg",
+    "Family/2025-06-holiday/DSC04102.jpg",
+    "Family/2025-06-holiday/DSC04103.jpg",
+    "Family/2025-06-holiday/DSC04104.jpg",
+    "Family/2025-06-holiday/DSC04105.jpg",
+    "Family/2025-06-holiday/scan_0001.jpg"
+   ]
+  },
+  {
+   "cat": "graph",
+   "query": "receipts from our holiday in Penang",
+   "targets": [
+    "Family/2025-06-holiday/scan_0001.jpg"
+   ]
+  },
+  {
+   "cat": "graph",
+   "query": "pictures taken at the Falcon site visit",
+   "targets": [
+    "Bakery/Photos/IMG_3310.jpg",
+    "Bakery/Photos/IMG_3311.jpg",
+    "Bakery/Photos/IMG_3312.jpg",
+    "Bakery/Photos/IMG_3301.jpg"
+   ]
+  },
+  {
+   "cat": "graph",
+   "query": "what relates to the Ashford vent consent",
+   "targets": [
+    "Bakery/Contracts/Ashford-vent-consent-letter.pdf",
+    "Bakery/Recordings/voice-memo-0305.m4a",
+    "Bakery/Meetings/2025-03-04 kickoff notes.md",
+    "Bakery/Contracts/Riverbend-Lease-2025_v2.docx"
+   ]
+  },
+  {
+   "cat": "graph",
+   "query": "documents about Harbor Mills deliveries",
+   "targets": [
+    "Bakery/Contracts/Harbor-Mills-Supply-Agreement-2025.pdf",
+    "Bakery/Recordings/supplier-call-0318.m4a",
+    "Bakery/Invoices/INV-2025-0400.pdf",
+    "Bakery/Invoices/INV-2025-0415.pdf"
+   ]
+  },
+  {
+   "cat": "graph",
+   "query": "newest version of the lease and any copies",
+   "targets": [
+    "Bakery/Contracts/Riverbend-Lease-2025_v2.docx",
+    "Bakery/Archive/lease-signed-copy.docx",
+    "Bakery/Contracts/Riverbend-Lease-2025_v1.docx"
+   ]
+  },
+  {
+   "cat": "graph",
+   "query": "Thermalux oven purchase",
+   "targets": [
+    "Bakery/Invoices/INV-2025-0507.pdf",
+    "Bakery/Meetings/Falcon budget.md",
+    "Bakery/Videos/oven-walkthrough.mp4"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "a woman with green hair is standing near a horse",
+   "targets": [
+    "Photos/2025/IMG_1267.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "a person riding on a bicycle on the street in front of some cars",
+   "targets": [
+    "Photos/2025/IMG_1205.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "A person putting doughnuts into a bag in a shop.",
+   "targets": [
+    "Photos/2024/IMG_1120.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "A brown bear lays down in the woods.",
+   "targets": [
+    "Photos/2024/IMG_1164.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "A giraffe leaning down to take a drink of water.",
+   "targets": [
+    "Photos/2025/IMG_1280.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "Two zebras standing side by side in a field",
+   "targets": [
+    "Photos/2024/IMG_1011.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "A stop sign in the middle of a city.",
+   "targets": [
+    "Photos/2024/IMG_1107.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "A bride is with a long red haired person with cake.",
+   "targets": [
+    "Photos/2025/IMG_1227.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "A pole with stop lights and a horse walking sign.",
+   "targets": [
+    "Photos/2024/IMG_1136.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "Teddy bear with a red bow hanging on a Christmas tree.",
+   "targets": [
+    "Photos/2025/IMG_1308.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "a baseball player on a field with a bat",
+   "targets": [
+    "Photos/2025/IMG_1317.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "Two young boys kicking a soccer ball in a field.",
+   "targets": [
+    "Photos/2024/IMG_1079.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "A woman is riding a horse as it jumps over a bar.",
+   "targets": [
+    "Photos/2025/IMG_1294.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "a group of people listening to music or possible playing video games",
+   "targets": [
+    "Photos/2024/IMG_1047.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "A group of people riding motorcycles and horses on a race track.",
+   "targets": [
+    "Photos/2024/IMG_1087.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "Men race bicycles on grass pulled by sleigh dogs.",
+   "targets": [
+    "Photos/2024/IMG_1110.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "A tall stack of suit cases is in the hall way.",
+   "targets": [
+    "Photos/2024/IMG_1165.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "A notebook computer is set on a table.",
+   "targets": [
+    "Photos/2025/IMG_1236.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "A very cute dog standing on a skate board.",
+   "targets": [
+    "Photos/2024/IMG_1144.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "A lamb and a sheep are out in the field together.",
+   "targets": [
+    "Photos/2024/IMG_1097.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "A man lunging to hit a tennis ball on a court",
+   "targets": [
+    "Photos/2024/IMG_1122.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "a green and white street sign some cars and buildings",
+   "targets": [
+    "Photos/2024/IMG_1042.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "A young boy riding a skateboard on a sidewalk",
+   "targets": [
+    "Photos/2024/IMG_1029.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "A couple of zebras in a dirt field.",
+   "targets": [
+    "Photos/2025/IMG_1216.jpg"
+   ]
+  }
+ ],
+ "tshirt": {
+  "query": "a man wearing a UGREEN T-shirt",
+  "positives": [
+   "Team/company-day/IMG_7000.jpg",
+   "Team/company-day/IMG_7001.jpg",
+   "Team/company-day/IMG_7002.jpg",
+   "Team/company-day/IMG_7003.jpg",
+   "Team/company-day/IMG_7004.jpg",
+   "Team/company-day/IMG_7005.jpg",
+   "Team/company-day/IMG_7006.jpg",
+   "Team/company-day/IMG_7007.jpg",
+   "Team/company-day/IMG_7008.jpg",
+   "Team/company-day/IMG_7009.jpg"
+  ],
+  "decoys_other_word": [
+   "Team/company-day/IMG_7010.jpg",
+   "Team/company-day/IMG_7011.jpg",
+   "Team/company-day/IMG_7012.jpg",
+   "Team/company-day/IMG_7013.jpg",
+   "Team/company-day/IMG_7014.jpg",
+   "Team/company-day/IMG_7015.jpg",
+   "Team/company-day/IMG_7016.jpg",
+   "Team/company-day/IMG_7017.jpg",
+   "Team/company-day/IMG_7018.jpg"
+  ],
+  "decoys_word_on_poster": [
+   "Team/company-day/IMG_7100.jpg",
+   "Team/company-day/IMG_7101.jpg",
+   "Team/company-day/IMG_7102.jpg",
+   "Team/company-day/IMG_7103.jpg",
+   "Team/company-day/IMG_7104.jpg",
+   "Team/company-day/IMG_7105.jpg",
+   "Team/company-day/IMG_7106.jpg",
+   "Team/company-day/IMG_7107.jpg",
+   "Team/company-day/IMG_7108.jpg",
+   "Team/company-day/IMG_7109.jpg"
+  ]
+ },
+ "holdout": [
+  {
+   "cat": "name",
+   "query": "vendor terms update",
+   "targets": [
+    "Bakery/Contracts/vendor-terms-update.pdf"
+   ]
+  },
+  {
+   "cat": "name",
+   "query": "invoice INV-2025-0418",
+   "targets": [
+    "Bakery/Invoices/INV-2025-0418.pdf"
+   ]
+  },
+  {
+   "cat": "name",
+   "query": "supplier call recording",
+   "targets": [
+    "Bakery/Recordings/supplier-call-0318.m4a"
+   ]
+  },
+  {
+   "cat": "name",
+   "query": "Falcon budget",
+   "targets": [
+    "Bakery/Meetings/Falcon budget.md"
+   ]
+  },
+  {
+   "cat": "content",
+   "query": "which city handles disputes in the flour contract",
+   "targets": [
+    "Bakery/Contracts/Harbor-Mills-Supply-Agreement-2025.pdf"
+   ]
+  },
+  {
+   "cat": "content",
+   "query": "who attended the first project meeting",
+   "targets": [
+    "Bakery/Meetings/2025-03-04 kickoff notes.md"
+   ]
+  },
+  {
+   "cat": "content",
+   "query": "how much flour does Harbor deliver each week",
+   "targets": [
+    "Bakery/Contracts/Harbor-Mills-Supply-Agreement-2025.pdf"
+   ]
+  },
+  {
+   "cat": "content",
+   "query": "what can the tenant not change without consent",
+   "targets": [
+    "Bakery/Contracts/Riverbend-Lease-2025_v1.docx",
+    "Bakery/Contracts/Riverbend-Lease-2025_v2.docx",
+    "Bakery/Archive/lease-signed-copy.docx"
+   ]
+  },
+  {
+   "cat": "content",
+   "query": "which bank funds the oven",
+   "targets": [
+    "Bakery/Meetings/Falcon budget.md"
+   ]
+  },
+  {
+   "cat": "content",
+   "query": "hydration of the rye dough",
+   "targets": [
+    "Bakery/Recipes/sourdough-rye.txt"
+   ]
+  },
+  {
+   "cat": "ocr",
+   "query": "window flowers florist receipt",
+   "targets": [
+    "Bakery/Scans/scan_003.jpg"
+   ]
+  },
+  {
+   "cat": "ocr",
+   "query": "bread bags packaging receipt",
+   "targets": [
+    "Bakery/Scans/scan_005.jpg"
+   ]
+  },
+  {
+   "cat": "ocr",
+   "query": "city hardware receipt",
+   "targets": [
+    "Bakery/Scans/scan_002.jpg"
+   ]
+  },
+  {
+   "cat": "ocr",
+   "query": "note on the board saying the vent needs the landlord",
+   "targets": [
+    "Bakery/Photos/IMG_3301.jpg"
+   ]
+  },
+  {
+   "cat": "spoken",
+   "query": "price stays at three dollars a kilo",
+   "targets": [
+    "Bakery/Recordings/supplier-call-0318.m4a"
+   ]
+  },
+  {
+   "cat": "spoken",
+   "query": "work outside trading hours and I still need the signed letter",
+   "targets": [
+    "Bakery/Recordings/voice-memo-0305.m4a",
+    "Bakery/Contracts/Ashford-vent-consent-letter.pdf"
+   ]
+  },
+  {
+   "cat": "spoken",
+   "query": "vent goes up the north wall",
+   "targets": [
+    "Bakery/Videos/oven-walkthrough.mp4"
+   ]
+  },
+  {
+   "cat": "graph",
+   "query": "files for the second oven line",
+   "targets": [
+    "Bakery/Meetings/2025-03-04 kickoff notes.md",
+    "Bakery/Meetings/Falcon budget.md",
+    "Bakery/Photos/IMG_3301.jpg",
+    "Bakery/Videos/oven-walkthrough.mp4",
+    "Bakery/Invoices/INV-2025-0507.pdf",
+    "Bakery/Contracts/Ashford-vent-consent-letter.pdf"
+   ]
+  },
+  {
+   "cat": "graph",
+   "query": "photos and recordings from the June holiday",
+   "targets": [
+    "Family/2025-06-holiday/DSC04100.jpg",
+    "Family/2025-06-holiday/DSC04101.jpg",
+    "Family/2025-06-holiday/DSC04102.jpg",
+    "Family/2025-06-holiday/DSC04103.jpg",
+    "Family/2025-06-holiday/DSC04104.jpg",
+    "Family/2025-06-holiday/DSC04105.jpg",
+    "Family/2025-06-holiday/voice-note-day2.m4a"
+   ]
+  },
+  {
+   "cat": "graph",
+   "query": "pictures from the day we ate at Gurney Drive",
+   "targets": [
+    "Family/2025-06-holiday/DSC04105.jpg",
+    "Family/2025-06-holiday/DSC04106.jpg",
+    "Family/2025-06-holiday/DSC04107.jpg",
+    "Family/2025-06-holiday/DSC04108.jpg",
+    "Family/2025-06-holiday/voice-note-day2.m4a"
+   ]
+  },
+  {
+   "cat": "graph",
+   "query": "our stay at Hotel Kenanga Bay",
+   "targets": [
+    "Family/2025-06-holiday/itinerary.md",
+    "Family/2025-06-holiday/scan_0001.jpg"
+   ]
+  },
+  {
+   "cat": "graph",
+   "query": "photos taken right after the whiteboard session",
+   "targets": [
+    "Bakery/Photos/IMG_3310.jpg",
+    "Bakery/Photos/IMG_3311.jpg",
+    "Bakery/Photos/IMG_3312.jpg"
+   ]
+  },
+  {
+   "cat": "graph",
+   "query": "paperwork behind the extraction vent",
+   "targets": [
+    "Bakery/Contracts/Ashford-vent-consent-letter.pdf",
+    "Bakery/Recordings/voice-memo-0305.m4a",
+    "Bakery/Meetings/2025-03-04 kickoff notes.md",
+    "Bakery/Meetings/Falcon budget.md"
+   ]
+  },
+  {
+   "cat": "graph",
+   "query": "everything under purchase order PO-2025-118",
+   "targets": [
+    "Bakery/Contracts/Harbor-Mills-Supply-Agreement-2025.pdf",
+    "Bakery/Invoices/INV-2025-0400.pdf",
+    "Bakery/Invoices/INV-2025-0403.pdf",
+    "Bakery/Invoices/INV-2025-0406.pdf",
+    "Bakery/Invoices/INV-2025-0409.pdf",
+    "Bakery/Invoices/INV-2025-0412.pdf",
+    "Bakery/Invoices/INV-2025-0415.pdf",
+    "Bakery/Invoices/INV-2025-0418.pdf",
+    "Bakery/Invoices/INV-2025-0421.pdf",
+    "Bakery/Invoices/INV-2025-0424.pdf",
+    "Bakery/Invoices/INV-2025-0427.pdf",
+    "Bakery/Invoices/INV-2025-0430.pdf",
+    "Bakery/Invoices/INV-2025-0433.pdf"
+   ]
+  },
+  {
+   "cat": "graph",
+   "query": "files connected to the Westpac loan",
+   "targets": [
+    "Bakery/Meetings/Falcon budget.md",
+    "Bakery/Invoices/INV-2025-0507.pdf",
+    "Bakery/Meetings/2025-03-04 kickoff notes.md"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "Black and white photograph of women on an old park bench",
+   "targets": [
+    "Photos/2024/IMG_1158.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "There is an ornate clock on the sidewalk",
+   "targets": [
+    "Photos/2025/IMG_1314.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "a skateboarder in a blue shirt is doing a trick",
+   "targets": [
+    "Photos/2024/IMG_1013.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "a rome with rose flowers and a sink",
+   "targets": [
+    "Photos/2025/IMG_1208.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "A picture of a woman sitting outside with a laptop and ciggorets while talking on phone.",
+   "targets": [
+    "Photos/2024/IMG_1169.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "Lot of two wheelers crossing across the road at a signal.",
+   "targets": [
+    "Photos/2025/IMG_1201.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "A water hydrant is that frozen with nothing on it.",
+   "targets": [
+    "Photos/2024/IMG_1059.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "A bowl sitting on a plate with cucmbers, lettuce and meat in it.",
+   "targets": [
+    "Photos/2025/IMG_1203.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "A white plate topped with meat veggies and rice with sauce.",
+   "targets": [
+    "Photos/2024/IMG_1082.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "A man looking out the window of a bus",
+   "targets": [
+    "Photos/2024/IMG_1166.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "A woman that has purple socks and a book.",
+   "targets": [
+    "Photos/2025/IMG_1303.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "Two trucks parked next to each other on a dirt road.",
+   "targets": [
+    "Photos/2025/IMG_1293.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "This picture looks like a janitors closet with buckets on the floor.",
+   "targets": [
+    "Photos/2024/IMG_1117.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "The woman is standing by the stop light.",
+   "targets": [
+    "Photos/2024/IMG_1083.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "A teddy bear inside of a wooden frame.",
+   "targets": [
+    "Photos/2024/IMG_1127.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "A very long train parked in front of a train station.",
+   "targets": [
+    "Photos/2024/IMG_1074.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "A stop sign with trees and tree branches close to it.",
+   "targets": [
+    "Photos/2024/IMG_1119.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "A computer desk with several pieces of computer equipment.",
+   "targets": [
+    "Photos/2024/IMG_1157.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "Two guys playing baseball, with trees in the back.",
+   "targets": [
+    "Photos/2024/IMG_1055.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "An assortment of pastries on a red table",
+   "targets": [
+    "Photos/2025/IMG_1277.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "some elephants and one is by some water",
+   "targets": [
+    "Photos/2025/IMG_1262.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "A person in jeans and two toned shoes sits on the back of a bench.",
+   "targets": [
+    "Photos/2025/IMG_1223.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "A dog is looking at the camera sadly.",
+   "targets": [
+    "Photos/2024/IMG_1106.jpg"
+   ]
+  },
+  {
+   "cat": "visual",
+   "query": "A Public Parking Payment booth in a lot.",
+   "targets": [
+    "Photos/2024/IMG_1101.jpg"
+   ]
+  }
+ ],
+ "tshirt_holdout": [
+  "man in a shirt with UGREEN printed on it",
+  "UGREEN logo on a person's chest"
+ ]
+}
