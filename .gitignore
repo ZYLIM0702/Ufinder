@@ -12,3 +12,4 @@ engine/data/
 engine/eval/data/
 engine/eval/results/shots/
 engine/eval/results/*.tmp
+submission/proposal_figures/

@@ -1,5 +1,5 @@
 {
- "server": "nas-atlas",
+ "server": "ufinder",
  "protocol": "2025-11-25",
  "tools": [
   "search_files",

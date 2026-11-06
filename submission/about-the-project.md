@@ -1,16 +1,36 @@
-## Find any file by what is inside it
+## The bottleneck in AI is data, not the model
 
-![Ufinder architecture](visuals/01-architecture.png)
+Every NAS maker is racing to put a bigger LLM in the box. That is the wrong race.
 
-I own a NAS. My files are all there, and I still cannot find them.
+A smarter model reading the wrong file gives you a smarter wrong answer. A model that cannot find the file gives you nothing. [Gartner](https://www.gartner.com/en/newsroom/press-releases/2025-02-26-lack-of-ai-ready-data-puts-ai-projects-at-risk) expects 60% of AI projects without AI-ready data to be abandoned through 2026, and 63% of organizations are not confident they manage data the way AI needs.
 
-I remember what is in a file. I do not remember what it is called, or which folder it went into. Search on a few TB can take minutes to hours, it eats memory, and it mostly looks at file names and text.
+Fast, correct retrieval is what makes an LLM useful, and retrieval does not need an LLM at all.
 
-AI should fix this. Instead it exposed a bigger gap. Every useful agent now needs to read my files, and every step needs an LLM. A good LLM is slow on local hardware, so people send data to the cloud, and a NAS exists to keep data at home.
+![Ufinder architecture](https://raw.githubusercontent.com/ZYLIM0702/Ufinder/main/submission/visuals/01-architecture.png)
 
-UGOS already has good AI: semantic photo search, OCR, document Q&A, local transcription. The missing part is what sits underneath. Each app keeps its own understanding, nothing joins them, and nothing records how files relate.
+## The problem on a NAS
 
-So I built that layer: **a private index that knows what is inside every file and how files connect**, ready the moment an agent asks, with no LLM needed to search it.
+My files are all on the NAS, and I still cannot find them.
+
+**File search is blind.** I remember what is in a file, not what it is called or which folder it went into. Search mostly looks at names and stored text. A photo, a scanned receipt and a voice memo have neither.
+
+**Every file type is a different problem.**
+
+| File | What it takes to understand it |
+|---|---|
+| Photo | Vision |
+| Scanned page | OCR |
+| Recording | Speech recognition |
+| Video | Vision, OCR and speech, over time |
+| Document | Parsing, then meaning |
+
+UGOS already has good AI for these: semantic photo search, OCR, document Q&A, local transcription. But each app keeps its own understanding, nothing joins them, and nothing records how files relate.
+
+**Agents pay for every look.** Every useful agent now needs to read my files. With no shared index, every step needs an LLM. A good LLM is slow on local hardware, so people send data to the cloud, and a NAS exists to keep data at home. A hundred thousand files cannot go through a chat loop.
+
+## The fix: build the memory, not a bigger brain
+
+I built the layer underneath: **a private index that knows what is inside every file and how files connect**, ready the moment an agent asks. Ufinder reads every file once, in the background, on the NAS. Then search is a lookup, not an inference.
 
 **Ufinder is two things:**
 
@@ -19,13 +39,27 @@ So I built that layer: **a private index that knows what is inside every file an
 
 It is built, and I tested it hard. Every number below is measured, including the ones that made me throw out my first design.
 
+| Result | Measured |
+|---|---|
+| Keyword, vector and graph lookup at 200,000 files | **21 ms** |
+| Keyword search at the same size | **6.6 ms** |
+| Right files found, 49 locked queries | **0.90** recall@10, against 0.47 for keyword alone |
+| Queries that need connections, without and with the graph | **0.60 to 0.90** |
+| Public COCO benchmark, 1,000 images | **95.1%** recall@10 |
+| Security and system checks on the live stack | **85 of 85** pass |
+| New file searchable by content | **2.1 s** |
+| Rename, with nothing read or embedded | **0.7 s** |
+| LLM calls on the search path | **0** |
+
+Lookup figures are before query embedding. A full text search on CPU takes about 669 ms, nearly all of it embedding the query. Scale figures use generated records through the real engines.
+
 ---
 
 ## See it work
 
 **"A man wearing a UGREEN T-shirt."** Text read from the photo finds the word. Picture vectors find the man and the shirt. Each votes separately, so the best match has both.
 
-![Search results for a man in a UGREEN T-shirt](visuals/07-search-tshirt.png)
+![Search results for a man in a UGREEN T-shirt](https://raw.githubusercontent.com/ZYLIM0702/Ufinder/main/submission/visuals/07-search-tshirt.png)
 
 I made this hard on purpose. The test set hides 19 decoys: the word on posters and signs, and other words on real shirts. Averaged over two held-out phrasings:
 
@@ -41,11 +75,11 @@ Posters still beat some shirts, so this is not solved. On the NAS, the Skill can
 
 **"Everything about Project Falcon."** One project, spread across notes, a budget, a whiteboard photo, a voice memo, a video, an invoice and a letter.
 
-![Search results for Project Falcon](visuals/11-search-falcon.png)
+![Search results for Project Falcon](https://raw.githubusercontent.com/ZYLIM0702/Ufinder/main/submission/visuals/11-search-falcon.png)
 
-![The file graph](visuals/08-graph.png)
+![The file graph](https://raw.githubusercontent.com/ZYLIM0702/Ufinder/main/submission/visuals/08-graph.png)
 
-![One file and everything connected to it](visuals/12-graph-local.png)
+![One file and everything connected to it](https://raw.githubusercontent.com/ZYLIM0702/Ufinder/main/submission/visuals/12-graph-local.png)
 
 **Nobody drew these links.** They come from evidence: identical content, a project name read off a whiteboard, a file named in a voice memo, photos taken minutes apart.
 
@@ -57,7 +91,7 @@ Posters still beat some shirts, so this is not solved. On the NAS, the Skill can
 
 **The graph** knows what a file *belongs to*. A hotel receipt has nothing in common with a beach photo, unless you know they came from the same trip.
 
-![How the index works](visuals/03-index-design.png)
+![How the index works](https://raw.githubusercontent.com/ZYLIM0702/Ufinder/main/submission/visuals/03-index-design.png)
 
 ### Read a file once
 
@@ -90,13 +124,13 @@ Parsing looks at one file, so it is pure, cached and resumable. Resolving looks 
 
 If a note says "see Falcon-floorplan-v3.pdf" and that file is not on the NAS, Ufinder records a ghost. The user sees what is missing, and when the file arrives, the ghost links itself. Measured: 0.5 seconds.
 
-![Missing files](visuals/09-missing.png)
+![Missing files](https://raw.githubusercontent.com/ZYLIM0702/Ufinder/main/submission/visuals/09-missing.png)
 
 ---
 
 ## How one search runs
 
-![The search pipeline](visuals/02-search-pipeline.png)
+![The search pipeline](https://raw.githubusercontent.com/ZYLIM0702/Ufinder/main/submission/visuals/02-search-pipeline.png)
 
 Keyword, picture and text results merge with reciprocal rank fusion, and only the top of each list votes:
 
@@ -141,7 +175,7 @@ Direct evidence can no longer be harmed, and a file with no direct match can sti
 
 Held-out set: 49 queries, hash-locked, run once. The test NAS has 464 files: documents, scanned receipts, whiteboard photos, recordings, video and 320 real photos as noise. No LLM. Settings are published defaults, plus the changes above. Test photos come from the COCO dataset, with faces blurred.
 
-![Recall by query type](visuals/04-results.png)
+![Recall by query type](https://raw.githubusercontent.com/ZYLIM0702/Ufinder/main/submission/visuals/04-results.png)
 
 | Query type | Queries | Keyword | Vector | Keyword + vector |
 |---|---|---|---|---|
@@ -159,7 +193,7 @@ Keyword cannot see photos. Vectors are weak on exact names and IDs. Together the
 
 The fair test: show 20 files either way. Do 10 direct plus 10 connected find more than 20 direct?
 
-![Graph gain per query](visuals/10-graph-gain.png)
+![Graph gain per query](https://raw.githubusercontent.com/ZYLIM0702/Ufinder/main/submission/visuals/10-graph-gain.png)
 
 | Queries | Count | 20 direct | 10 direct + 10 connected |
 |---|---|---|---|
@@ -208,7 +242,7 @@ On the real stack, a full search takes about 669 ms, nearly all of it embedding 
 
 ### What the model really costs
 
-![Model speed and memory](visuals/06-model-reality.png)
+![Model speed and memory](https://raw.githubusercontent.com/ZYLIM0702/Ufinder/main/submission/visuals/06-model-reality.png)
 
 I expected a light model to run in the background. Measurement said otherwise:
 
@@ -217,7 +251,21 @@ I expected a light model to run in the background. Measurement said otherwise:
 - 8-bit quantization looked like the fix. It was slower, used more memory, and damaged the vectors: they matched the originals at only 0.62 cosine. Rejected.
 - The real pipeline in Linux Docker, with OCR, took 4.7 seconds per image on 6 cores. For 100,000 photos, that is about 5.5 days in the background.
 
-Qwen3-VL-Embedding-2B is a good fit here. Reviews report that Uliya runs on the Qwen family too, so it matches the NAS, and its license is Apache-2.0. But 2B parameters is not small. It fits on the iDX6011 Pro with 64 GB. It does not fit on an 8 GB model. A first index is a job of days, not minutes, which is why it runs in stages and search works from the first pass.
+Qwen3-VL-Embedding-2B is a good fit here. Reviews report that Uliya runs on the Qwen family too, so our embeddings share its base, and the license is Apache-2.0. But 2B parameters is not small. It fits on the iDX6011 Pro with 64 GB. It does not fit on an 8 GB model.
+
+### A NAS never sleeps
+
+4.7 seconds per image sounds slow, and on a laptop it would be. A NAS runs 24/7.
+
+| Work | Time |
+|---|---|
+| One image | 4.7 s on 6 CPU cores |
+| One day | About 18,000 images, in the background |
+| 100,000 photos | About 5.5 days, once |
+| After that | Only new files cost anything |
+| Every search after that | 21 ms of lookup, and no LLM |
+
+**An LLM pays on every question. An index pays once.** The first index runs in stages, so search works from the first pass and improves while it runs. These times come from a laptop in Docker. Speed on the iDX6011 Pro is the first thing I will test.
 
 ---
 
@@ -241,7 +289,7 @@ MCP tested with the official SDK: protocol 2025-11-25, 6 tools, bad keys rejecte
 
 A Skill can ask a model to behave. It cannot block a network. So the real guardrails sit underneath, where a model cannot talk its way past them.
 
-![Privacy test results](visuals/05-privacy-tests.png)
+![Privacy test results](https://raw.githubusercontent.com/ZYLIM0702/Ufinder/main/submission/visuals/05-privacy-tests.png)
 
 | Guardrail | How it works |
 |---|---|
@@ -274,6 +322,37 @@ A demo would have hidden all of these.
 | Reusing a deleted path **killed the file watcher** | Live tracking would have stopped silently | Fixed, and one bad event can no longer end tracking |
 | A model restart marked files **permanently failed** | Files would vanish from search | An outage no longer counts against the file |
 | Audio silently failed, so a video lost its transcript | A swallowed error hides real loss | Failures now surface |
+
+---
+
+## Where Ufinder sits
+
+**Everyone else is adding a bigger brain. Ufinder builds the memory.**
+
+| | LLM-first AI NAS | Ufinder |
+|---|---|---|
+| Core idea | Put a smarter model on the box | Put a better index under any model |
+| Search needs | A GPU and an LLM | CPU and an index, no LLM |
+| Cost of a search | Inference | About 21 ms of lookup, plus one query embedding |
+| Understanding | Per app | One index across every file type |
+| Relationships | Not modelled | A graph built from evidence |
+| Privacy | Depends on the prompt and model | Enforced below the model |
+| Agents | Tied to one assistant | MCP and REST for any agent |
+| Model choice | The vendor's | Local Qwen by default, or your own endpoint |
+
+The products closest to this, as of November 2026:
+
+| Product | What it does | Where it stops |
+|---|---|---|
+| [Synology AI Search](https://www.synology.com/en-us/dsm/7.3/software_spec/ai_console) | Embedding search in Drive | Drive only, and needs a GPU model |
+| [QNAP Qsirch AI Mode](https://www.qnap.com/en-us/software/qsirch) | Cross-media search with local VLM and LLM. The closest rival | Needs a discrete GPU with 16 GB of VRAM or more |
+| [Immich](https://docs.immich.app/features/search) | CLIP smart search, self-hosted | Photos and videos only. No documents, speech or graph |
+| [Dropbox Dash](https://www.businesswire.com/news/home/20250424371851/en) | Cross-format search | Cloud and paid. Your files leave home |
+| find, grep, ripgrep | Fast exact matching | No meaning, text only, and they scan everything each time |
+
+To be fair to the alternatives: QNAP's VLM route can answer richer questions than an index can, on far more expensive hardware. An LLM still reads meaning that embeddings miss. So Ufinder hands it the right files, and the Skill calls UGOS vision for the last check.
+
+This matters beyond one app. NAS is a [USD 39B to 55B](https://www.rootsanalysis.com/network-attached-storage-market) market in 2026, depending on the firm, and [consumer NAS](https://www.credenceresearch.com/report/consumer-nas-market) is estimated to double by 2032. Market reports disagree widely, so read those as order of magnitude. The point for UGREEN is simpler: any agent that can reach this index needs fewer LLM turns, so it makes every other Skill better. A 24/7 box with idle CPU is the right place to do this work.
 
 ---
 

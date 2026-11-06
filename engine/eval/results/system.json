@@ -63,7 +63,7 @@
   "group": "read only",
   "name": "container filesystem is read-only",
   "ok": true,
-  "detail": "cent call last):\n  File \"<string>\", line 1, in <module>\nOSError: [Errno 30] Read-only file system: '/app/atlas/evil.py'\n"
+  "detail": "nt call last):\n  File \"<string>\", line 1, in <module>\nOSError: [Errno 30] Read-only file system: '/app/ufinder/evil.py'\n"
  },
  {
   "group": "read only",
@@ -285,13 +285,13 @@
   "group": "key limits",
   "name": "key secret is stored only as a hash",
   "ok": true,
-  "detail": "40a3964c99e8"
+  "detail": "a515eebad47a"
  },
  {
   "group": "audit",
   "name": "audit chain verifies",
   "ok": true,
-  "detail": "{'ok': True, 'rows': 161}"
+  "detail": "{'ok': True, 'rows': 18}"
  },
  {
   "group": "audit",
@@ -319,21 +319,21 @@
  },
  {
   "group": "change tracking",
-  "name": "new file's content searchable in 3.3s",
+  "name": "new file's content searchable in 2.2s",
   "ok": true,
-  "detail": "3.332404851913452"
+  "detail": "2.222254991531372"
  },
  {
   "group": "change tracking",
   "name": "rename seen in 0.7s with no re-embedding",
   "ok": true,
-  "detail": "('(462, 1793953232.796417, 1)', '(462, 1793953232.796417, 1)')"
+  "detail": "('(462, 1793979535.5624046, 1)', '(462, 1793979535.5624046, 1)')"
  },
  {
   "group": "change tracking",
-  "name": "edit reindexed in 3.3s",
+  "name": "edit reindexed in 3.5s",
   "ok": true,
-  "detail": "3.3133387565612793"
+  "detail": "3.487006902694702"
  },
  {
   "group": "change tracking",
@@ -355,9 +355,9 @@
  },
  {
   "group": "change tracking",
-  "name": "delete purged in 0.7s",
+  "name": "delete purged in 0.8s",
   "ok": true,
-  "detail": "0.7159991264343262"
+  "detail": "0.7529458999633789"
  },
  {
   "group": "change tracking",
@@ -373,21 +373,21 @@
  },
  {
   "group": "missing files",
-  "name": "ghost resolved itself 2.0s after the file arrived",
+  "name": "ghost resolved itself 1.5s after the file arrived",
   "ok": true,
-  "detail": "2.031008005142212"
+  "detail": "1.5308420658111572"
  },
  {
   "group": "skill bridge",
   "name": "engine writes status.md",
   "ok": true,
-  "detail": "engine/data/exchange/alice/Atlas/status.md"
+  "detail": "status.md"
  },
  {
   "group": "skill bridge",
-  "name": "file request answered in 0.0s",
+  "name": "file request answered in 2.5s",
   "ok": true,
-  "detail": "# Atlas results\n\nQuery: ZEBRA-ORCHID-7741\nUser: alice\nFound: 10\n\n1. scans/passport-note.jpg (photo): Text in image, Mean"
+  "detail": "# Ufinder results\n\nQuery: ZEBRA-ORCHID-7741\nUser: alice\nFound: 10\n\n1. scans/passport-note.jpg (photo): Text in image, Lo"
  },
  {
   "group": "skill bridge",

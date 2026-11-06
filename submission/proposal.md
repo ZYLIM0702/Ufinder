@@ -2,43 +2,43 @@
 
 ## 1. What it does
 
-Ufinder finds any file on a UGREEN NAS by what is inside it, across photos, documents, recordings and video, and shows why each file matched.
+Ufinder finds any file on a UGREEN NAS by what is inside it, across photos, documents, recordings and video, and shows the evidence for every match.
 
 ## 2. User and problem
 
-NAS owners with scattered terabytes. They remember content, not file names. UGOS has good AI, but each app keeps its own, and nothing records how files relate. Agents have no shared index, so they spend one LLM turn per file: slow locally, risky in the cloud.
+NAS owners with terabytes. AI's bottleneck is data, not model intelligence: a smarter LLM reading the wrong file still fails. People remember content, not file names. Each file type needs different AI, each UGOS app keeps its own, and nothing records how files relate. Agents spend one LLM turn per file.
 
 ## 3. Solution
 
-The Skill turns one question into searches across every UGOS AI service and merges results with evidence. An optional local engine, installed by the owner, builds one permission-aware vector and graph index, so search needs no LLM.
+The Skill turns one request into searches across UGOS AI services, ranked by evidence. An optional owner-installed engine reads each file once into one permission-aware vector and graph index, so search becomes a lookup, not an inference.
 
 ## 4. User flow
 
-The user asks Uliya: "find the photo of a man in a UGREEN T-shirt." The Skill searches each domain, verifies top photos with vision, and returns paths, reasons and evidence. Next: album, tags or graph notes. Every write needs approval.
+Ask Uliya: "find the photo of a man in a UGREEN T-shirt." The Skill searches each domain, verifies top photos with vision, and returns paths and evidence. Next: album, tags or notes. Every write needs approval.
 
 ## 5. Difference
 
-Existing tools search one silo. We rank OCR, passage, transcript and vision evidence together, then walk a file graph to find files no word or picture matches, such as photos taken after a whiteboard session. Privacy sits below the LLM: read-only mounts, no internet route, per-user filtering.
+Competitors race to fit bigger LLMs. Ufinder builds the memory underneath. One search spans text, speech and vision. A file graph then finds what no word or picture matches, like photos taken after a whiteboard session. Privacy sits below the LLM: read-only mounts, no internet route, per-user filtering.
 
-## 6. NAS capabilities
+## 6. NAS features
 
-Search: ug-photo search-picture and search-screen, ug-document qa, ug-knowledge collect-evidence, ug-video search, ug-filesystem find. Verify: vision-ocr, vision-vlm. Act: create-album, tag-add-file, save-text, file-workflow start and run.
+Search: ug-photo search-picture, search-screen; ug-document qa; ug-knowledge collect-evidence; ug-video search; ug-filesystem find. Verify: vision-ocr, vision-vlm. Understand: extract, reconcile, audio-transcription, scan-dedupe, event-timeline. Act: create-album, tag-add-file, save-text, file-workflow.
 
 ## 7. Technical approach
 
-The parent Skill only delegates, to photo-, document-, knowledge-, media- and file-agent. Inputs: request and scope. UGOS permissions and approvals apply. Rules forbid daemons and local API calls, so the owner installs the engine in Docker, and the Skill reads its files from the user's folder. Engine: SQLite file table, BM25 and graph; Qdrant vectors; rank fusion; personalized PageRank; local Qwen3-VL-Embedding-2B, Uliya's model family. Frontier models connect per folder, off by default. If Uliya uses a cloud model, content follows that setting, and the Skill warns first.
+The parent Skill only delegates, to all six expert agents, through 16 functions. Inputs: request and scope. UGOS permissions and approvals apply. Rules forbid daemons and local APIs, so the owner installs the engine in Docker, and the Skill reads results from the user's folder. Engine: SQLite files, BM25 and graph; Qdrant vectors; personalized PageRank; local Qwen3-VL-Embedding-2B, Uliya's model family. Frontier models connect by endpoint, per folder, off by default. If Uliya uses a cloud model, the Skill warns first.
 
-## 8. Status
+## 8. Built so far
 
-Implemented: Skill package passing the static checker. Engine prototype, tested in Docker on a laptop: 85 of 85 system checks, recall@10 0.90 on 49 locked held-out queries, 95.1% on 1,000 COCO images. Not implemented: UGOS app packaging. Pending NAS validation: expert behaviour, approval prompts, exchange folder, iDX6011 Pro speed.
+Built: Skill, passing the static checker. Engine, tested in Docker on a laptop: 85 of 85 system checks; recall@10 0.90 on 49 locked queries; 95.1% on 1,000 COCO images; 21 ms lookup at 200,000 generated files, before query embedding. Not built: UGOS app packaging. NAS testing: expert behaviour, approvals, exchange folder, iDX6011 Pro speed.
 
-## 9. Validation
+## 9. Test plan
 
-Core 1: find UGREEN T-shirt photos among poster and wrong-word decoys, native versus engine. Core 2: labelled content queries across documents and recordings, measuring recall@10. Edge: user B searches for user A's private file; expect zero leaks in results, snippets or graph.
+Core 1: find UGREEN T-shirt photos among poster and wrong-word decoys, native versus engine. Core 2: labelled queries across documents and recordings, measuring recall@10. Edge: user B searches for user A's private file; expect zero leaks in results, snippets or graph.
 
 ## 10. Limits
 
-Skill-only mode depends on Uliya's model speed. The engine's model needs about 9 GB of RAM, and a first index takes days on CPU. Test data is synthetic. We have no OS-level access: Docker gives no system change feed or UGOS identity, so we plan official UGOS Docker and Native app packages, with UGREEN's guidance. Running the engine on the judging NAS needs organizer confirmation. The Skill works without it.
+Skill-only speed depends on Uliya's model. The engine's model needs about 9 GB RAM, and a first index takes days on CPU, in the background on a 24/7 machine. Test data is synthetic. We have no OS-level access yet: Docker gives no change feed or UGOS identity, so we plan official UGOS apps. The engine on the judging NAS needs organizer confirmation. The Skill works without it.
 
 ## Third-party components, sources and licenses
 
@@ -60,3 +60,5 @@ External services and data flows: the Skill calls no external service. Expert re
 Test data, not distributed: COCO val2017 photos, faces blurred.
 
 AI tools: Claude Code (Claude Opus 5.5) for research, Skill drafting, engine code and tests, proposal drafting, diagrams and static checks.
+
+Ufinder is an independent project, not an official UGREEN product.

@@ -1,16 +1,36 @@
-## Find any file by what is inside it
+## The bottleneck in AI is data, not the model
+
+Every NAS maker is racing to put a bigger LLM in the box. That is the wrong race.
+
+A smarter model reading the wrong file gives you a smarter wrong answer. A model that cannot find the file gives you nothing. [Gartner](https://www.gartner.com/en/newsroom/press-releases/2025-02-26-lack-of-ai-ready-data-puts-ai-projects-at-risk) expects 60% of AI projects without AI-ready data to be abandoned through 2026, and 63% of organizations are not confident they manage data the way AI needs.
+
+Fast, correct retrieval is what makes an LLM useful, and retrieval does not need an LLM at all.
 
 ![Ufinder architecture](IMG:01-architecture.png)
 
-I own a NAS. My files are all there, and I still cannot find them.
+## The problem on a NAS
 
-I remember what is in a file. I do not remember what it is called, or which folder it went into. Search on a few TB can take minutes to hours, it eats memory, and it mostly looks at file names and text.
+My files are all on the NAS, and I still cannot find them.
 
-AI should fix this. Instead it exposed a bigger gap. Every useful agent now needs to read my files, and every step needs an LLM. A good LLM is slow on local hardware, so people send data to the cloud, and a NAS exists to keep data at home.
+**File search is blind.** I remember what is in a file, not what it is called or which folder it went into. Search mostly looks at names and stored text. A photo, a scanned receipt and a voice memo have neither.
 
-UGOS already has good AI: semantic photo search, OCR, document Q&A, local transcription. The missing part is what sits underneath. Each app keeps its own understanding, nothing joins them, and nothing records how files relate.
+**Every file type is a different problem.**
 
-So I built that layer: **a private index that knows what is inside every file and how files connect**, ready the moment an agent asks, with no LLM needed to search it.
+| File | What it takes to understand it |
+|---|---|
+| Photo | Vision |
+| Scanned page | OCR |
+| Recording | Speech recognition |
+| Video | Vision, OCR and speech, over time |
+| Document | Parsing, then meaning |
+
+UGOS already has good AI for these: semantic photo search, OCR, document Q&A, local transcription. But each app keeps its own understanding, nothing joins them, and nothing records how files relate.
+
+**Agents pay for every look.** Every useful agent now needs to read my files. With no shared index, every step needs an LLM. A good LLM is slow on local hardware, so people send data to the cloud, and a NAS exists to keep data at home. A hundred thousand files cannot go through a chat loop.
+
+## The fix: build the memory, not a bigger brain
+
+I built the layer underneath: **a private index that knows what is inside every file and how files connect**, ready the moment an agent asks. Ufinder reads every file once, in the background, on the NAS. Then search is a lookup, not an inference.
 
 **Ufinder is two things:**
 
@@ -18,6 +38,20 @@ So I built that layer: **a private index that knows what is inside every file an
 - **An optional local engine** with one vector and graph index across photos, documents, recordings and video.
 
 It is built, and I tested it hard. Every number below is measured, including the ones that made me throw out my first design.
+
+| Result | Measured |
+|---|---|
+| Keyword, vector and graph lookup at {{SCALE_FILES}} files | **{{SCALE_FULL}} ms** |
+| Keyword search at the same size | **{{SCALE_KEYWORD}} ms** |
+| Right files found, {{HELD_N}} locked queries | **{{RECALL_ALL}}** recall@10, against {{RECALL_KEYWORD}} for keyword alone |
+| Queries that need connections, without and with the graph | **{{GRAPH_BEFORE}} to {{GRAPH_AFTER}}** |
+| Public COCO benchmark, 1,000 images | **{{COCO_BINARY}}%** recall@10 |
+| Security and system checks on the live stack | **{{TESTS_PASSED}} of {{TESTS_TOTAL}}** pass |
+| New file searchable by content | **{{NEW_FILE_SECONDS}} s** |
+| Rename, with nothing read or embedded | **{{RENAME_SECONDS}} s** |
+| LLM calls on the search path | **0** |
+
+Lookup figures are before query embedding. A full text search on CPU takes about {{FULL_P50}} ms, nearly all of it embedding the query. Scale figures use generated records through the real engines.
 
 ---
 
@@ -193,7 +227,21 @@ I expected a light model to run in the background. Measurement said otherwise:
 
 {{MODEL_NOTES}}
 
-Qwen3-VL-Embedding-2B is a good fit here. Reviews report that Uliya runs on the Qwen family too, so it matches the NAS, and its license is Apache-2.0. But 2B parameters is not small. It fits on the iDX6011 Pro with 64 GB. It does not fit on an 8 GB model. A first index is a job of days, not minutes, which is why it runs in stages and search works from the first pass.
+Qwen3-VL-Embedding-2B is a good fit here. Reviews report that Uliya runs on the Qwen family too, so our embeddings share its base, and the license is Apache-2.0. But 2B parameters is not small. It fits on the iDX6011 Pro with 64 GB. It does not fit on an 8 GB model.
+
+### A NAS never sleeps
+
+{{SECONDS_PER_IMAGE}} seconds per image sounds slow, and on a laptop it would be. A NAS runs 24/7.
+
+| Work | Time |
+|---|---|
+| One image | {{SECONDS_PER_IMAGE}} s on 6 CPU cores |
+| One day | About {{IMAGES_PER_DAY}} images, in the background |
+| 100,000 photos | About {{DAYS_100K}} days, once |
+| After that | Only new files cost anything |
+| Every search after that | {{SCALE_FULL}} ms of lookup, and no LLM |
+
+**An LLM pays on every question. An index pays once.** The first index runs in stages, so search works from the first pass and improves while it runs. These times come from a laptop in Docker. Speed on the iDX6011 Pro is the first thing I will test.
 
 ---
 
@@ -250,6 +298,37 @@ A demo would have hidden all of these.
 | Reusing a deleted path **killed the file watcher** | Live tracking would have stopped silently | Fixed, and one bad event can no longer end tracking |
 | A model restart marked files **permanently failed** | Files would vanish from search | An outage no longer counts against the file |
 | Audio silently failed, so a video lost its transcript | A swallowed error hides real loss | Failures now surface |
+
+---
+
+## Where Ufinder sits
+
+**Everyone else is adding a bigger brain. Ufinder builds the memory.**
+
+| | LLM-first AI NAS | Ufinder |
+|---|---|---|
+| Core idea | Put a smarter model on the box | Put a better index under any model |
+| Search needs | A GPU and an LLM | CPU and an index, no LLM |
+| Cost of a search | Inference | About {{SCALE_FULL}} ms of lookup, plus one query embedding |
+| Understanding | Per app | One index across every file type |
+| Relationships | Not modelled | A graph built from evidence |
+| Privacy | Depends on the prompt and model | Enforced below the model |
+| Agents | Tied to one assistant | MCP and REST for any agent |
+| Model choice | The vendor's | Local Qwen by default, or your own endpoint |
+
+The products closest to this, as of November 2026:
+
+| Product | What it does | Where it stops |
+|---|---|---|
+| [Synology AI Search](https://www.synology.com/en-us/dsm/7.3/software_spec/ai_console) | Embedding search in Drive | Drive only, and needs a GPU model |
+| [QNAP Qsirch AI Mode](https://www.qnap.com/en-us/software/qsirch) | Cross-media search with local VLM and LLM. The closest rival | Needs a discrete GPU with 16 GB of VRAM or more |
+| [Immich](https://docs.immich.app/features/search) | CLIP smart search, self-hosted | Photos and videos only. No documents, speech or graph |
+| [Dropbox Dash](https://www.businesswire.com/news/home/20250424371851/en) | Cross-format search | Cloud and paid. Your files leave home |
+| find, grep, ripgrep | Fast exact matching | No meaning, text only, and they scan everything each time |
+
+To be fair to the alternatives: QNAP's VLM route can answer richer questions than an index can, on far more expensive hardware. An LLM still reads meaning that embeddings miss. So Ufinder hands it the right files, and the Skill calls UGOS vision for the last check.
+
+This matters beyond one app. NAS is a [USD 39B to 55B](https://www.rootsanalysis.com/network-attached-storage-market) market in 2026, depending on the firm, and [consumer NAS](https://www.credenceresearch.com/report/consumer-nas-market) is estimated to double by 2032. Market reports disagree widely, so read those as order of magnitude. The point for UGREEN is simpler: any agent that can reach this index needs fewer LLM turns, so it makes every other Skill better. A 24/7 box with idle CPU is the right place to do this work.
 
 ---
 

@@ -1,6 +1,9 @@
 """Fill about-the-project.md and docs/RESULTS.md from engine/eval/results.
 
 No number in the story is typed by hand. If a test is rerun, run this again.
+
+Images link to the GitHub repo, because Devpost allows 50,000 characters and base64
+images do not fit. Pass another base URL or folder to change that.
 """
 import json
 import re
@@ -10,7 +13,7 @@ from pathlib import Path
 HERE = Path(__file__).parent
 ROOT = HERE.parent
 R = ROOT / "engine/eval/results"
-IMG_BASE = sys.argv[1] if len(sys.argv) > 1 else "visuals/"
+IMG_BASE = sys.argv[1] if len(sys.argv) > 1 else "https://raw.githubusercontent.com/ZYLIM0702/Ufinder/main/submission/visuals/"
 
 ev = json.loads((R / "eval_holdout.json").read_text())
 dev = json.loads((R / "eval_dev.json").read_text())
@@ -122,6 +125,14 @@ tokens = {
     "KEYWORD_P50": f"{ev['latency']['keyword']['p50_ms']:.1f}",
     "MODEL_NOTES": model_notes(),
     "SECONDS_PER_IMAGE": f"{1 / {r['key']: r for r in model['rows']}['docker']['images_per_s']:.1f}",
+    "SCALE_FULL": f"{scale['latency_ms']['full']['p50']:.0f}",
+    "RECALL_ALL": f"{ev['summary']['all']['hybrid']['recall@10']:.2f}",
+    "RECALL_KEYWORD": f"{ev['summary']['all']['keyword']['recall@10']:.2f}",
+    "GRAPH_BEFORE": f"{ev['summary']['graph']['budget20']['direct_only']:.2f}",
+    "GRAPH_AFTER": f"{ev['summary']['graph']['budget20']['direct_plus_connected']:.2f}",
+    "COCO_BINARY": f"{coco['dims']['1024']['recall@10_binary_rescore'] * 100:.1f}",
+    "IMAGES_PER_DAY": f"{round({r['key']: r for r in model['rows']}['docker']['images_per_s'] * 86400, -3):,.0f}",
+    "DAYS_100K": f"{100000 / {r['key']: r for r in model['rows']}['docker']['images_per_s'] / 86400:.1f}",
     "TESTS_PASSED": str(passed),
     "TESTS_TOTAL": str(len(system)),
 }
@@ -252,4 +263,6 @@ Not done: a full packet capture. The check that would have pulled a third-party 
 if failing:
     results += "\nFailing:\n\n" + "\n".join(f"- {r['group']}: {r['name']}: {r['detail']}" for r in failing) + "\n"
 (ROOT / "docs/RESULTS.md").write_text(results, "utf8")
-print("tests", passed, "of", len(system), "| words in story:", len(story.split()), "| images:", story.count("!["))
+print("tests", passed, "of", len(system), "| words in story:", len(story.split()), "| images:", story.count("!["), "| characters:", len(story), "of 50,000")
+if len(story) > 50000:
+    raise SystemExit("story is over the Devpost limit of 50,000 characters")
